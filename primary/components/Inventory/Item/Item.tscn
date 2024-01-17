@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2owow7yjmdmy"]
+
+[ext_resource type="Script" path="res://primary/components/Inventory/Item/Item.gd" id="1_xsisl"]
+
+[node name="Item" type="TextureRect"]
+custom_minimum_size = Vector2(30, 30)
+expand_mode = 2
+stretch_mode = 5
+script = ExtResource("1_xsisl")
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -10.0
+offset_top = -16.0
+offset_bottom = 8.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 19
+horizontal_alignment = 2
+vertical_alignment = 2
+autowrap_mode = 2

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cl3tpbxmq035"]
+
+[ext_resource type="Script" path="res://primary/caliber/Caliber.gd" id="1_sesq8"]
+
+[node name="Caliber" type="Node2D"]
+script = ExtResource("1_sesq8")

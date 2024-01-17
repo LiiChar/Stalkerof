@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://gmrseoj7bv8a"]
+
+[ext_resource type="Script" path="res://Mobs/Player/PickMenu/PickMenu.gd" id="1_mp0bb"]
+
+[node name="PickMenu" type="VBoxContainer"]
+offset_left = 47.0
+offset_top = 1.0
+offset_right = 47.0
+offset_bottom = 1.0
+script = ExtResource("1_mp0bb")
