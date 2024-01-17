@@ -19,9 +19,8 @@ var item = [
 var armament = {
 	"first_weapon": Item_factory.create("res://assets/entity/weapon/vintorez.png", 1,  [1, 0], Info.new("weapon", "Vintorez", "My favorite gun", {}, 1000)),
 }
-var pickable = []
 var prev_state = STATE.MOVE
-var weapon: Weapon
+@onready var weapon: Weapon = $Weapon
 @onready var inventory = $UI
 @onready var animation_sprite = $AnimatedSprite2D
 @onready var collision_shape = $CollisionShape2D
@@ -33,11 +32,10 @@ var weapon: Weapon
 func _ready(): 
 	for arm in armament:
 		if (arm == 'first_weapon'):
-			var weapon = Weapon.new("res://assets/entity/weapon/vintorez.png", 20)
+			weapon.init("res://assets/entity/weapon/vintorez.png", 20, 20)
 			weapon.position.y = global_position.y - 3
 			weapon.z_index = 4
 			self.weapon = weapon
-			add_child(weapon)
 	inventory.create(item, armament)
 	inventory.connect("inventory_trade", _on_inventory_trader)
 	health = max_health
@@ -56,7 +54,7 @@ func _unhandled_input(event):
 	if event.is_action_released("inventory"):
 		inventory.hide()
 	if event.is_action_pressed("attack"):
-		if (weapon != null and not inventory.is_visible()):
+		if (weapon != null):
 			weapon._fire()
 	if event.is_action_pressed("list_up"):
 		if ($PickMenu.visible):
@@ -65,11 +63,14 @@ func _unhandled_input(event):
 		if ($PickMenu.visible):
 			$PickMenu.set_next_current_label()
 	if event.is_action_pressed("use"):
-		if ($PickMenu.visible):
+		if ($PickMenu.visible and len($PickMenu.pickable_package)):
 			var items = $PickMenu.get_items_by_title($PickMenu.current_label.text)
 			if (items != null):
 				inventory.add_out_inventory(items, 50)
 				inventory.show()
+	if event.is_action_pressed("reload"):
+		if (weapon != null):
+			weapon.reload()
 		
 func _physics_process(_delta: float) -> void:
 	match state:

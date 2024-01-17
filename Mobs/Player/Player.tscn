@@ -1,6 +1,7 @@
-[gd_scene load_steps=29 format=3 uid="uid://qfn0yau7ue2o"]
+[gd_scene load_steps=30 format=3 uid="uid://qfn0yau7ue2o"]
 
 [ext_resource type="Script" path="res://Mobs/Player/Player.gd" id="1_1heul"]
+[ext_resource type="PackedScene" uid="uid://drpft8xl6xsac" path="res://primary/weapon/Weapon.tscn" id="2_bqo3d"]
 [ext_resource type="Texture2D" uid="uid://bnyy7b7u6ydvn" path="res://assets/entity/player/stalker-sheet.png" id="2_u2t5t"]
 [ext_resource type="PackedScene" uid="uid://chmii5jckjwxk" path="res://primary/components/Inventory/UI.tscn" id="3_f5qua"]
 [ext_resource type="PackedScene" uid="uid://gmrseoj7bv8a" path="res://Mobs/Player/PickMenu/PickMenu.tscn" id="4_hy20w"]
@@ -186,6 +187,8 @@ floor_stop_on_slope = false
 script = ExtResource("1_1heul")
 health = 100.0
 speed = 100.0
+
+[node name="Weapon" parent="." instance=ExtResource("2_bqo3d")]
 
 [node name="UI" parent="." instance=ExtResource("3_f5qua")]
 offset_left = -560.0
