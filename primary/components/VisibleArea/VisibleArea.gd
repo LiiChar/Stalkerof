@@ -10,7 +10,7 @@ extends Area2D
 var intersect = []
 			
 func _on_body_entered(body):
-	if "enemy" in body.get_groups():
+	if "entity" in body.get_groups():
 		chech_visible(body)
 
 func _on_body_exited(body):

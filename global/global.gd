@@ -13,6 +13,31 @@ func _ready():
 	
 func _on_timer_timeout():
 	time += 1
+	
+enum GROUPS {STALKER, MONSTER, BANDIT, SCIENTIST}
+	
+var groups_relation = {
+	GROUPS.STALKER: {
+		GROUPS.BANDIT: 20,
+		GROUPS.SCIENTIST: 50,
+		GROUPS.MONSTER: 0,
+	},
+	GROUPS.BANDIT: {
+		GROUPS.STALKER: 20,
+		GROUPS.SCIENTIST: 20,
+		GROUPS.MONSTER: 0,
+	},
+	GROUPS.SCIENTIST: {
+		GROUPS.BANDIT: 30,
+		GROUPS.STALKER: 50,
+		GROUPS.MONSTER: 0,
+	},
+	GROUPS.MONSTER: {
+		GROUPS.BANDIT: 0,
+		GROUPS.STALKER: 0,
+		GROUPS.SCIENTIST: 0,
+	},
+}
 
 var bullet = [
   {
