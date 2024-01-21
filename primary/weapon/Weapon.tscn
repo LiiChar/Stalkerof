@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://primary/weapon/Weapon.gd" id="1_2f73b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_21maf"]
-size = Vector2(30.5, 9.5)
+size = Vector2(20.125, 6.875)
 
 [node name="Weapon" type="CharacterBody2D"]
 script = ExtResource("1_2f73b")

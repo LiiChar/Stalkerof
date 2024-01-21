@@ -1,5 +1,19 @@
 extends Node
 
+var Global
+
+var time: int = 0
+
+func _ready():
+	var timer = Timer.new()
+	timer.wait_time = 0.2
+	timer.connect('timeout', _on_timer_timeout)
+	add_child(timer)
+	timer.start()
+	
+func _on_timer_timeout():
+	time += 1
+
 var bullet = [
   {
 	"caliber": "БП 9x39",

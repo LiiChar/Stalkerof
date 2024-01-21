@@ -16,7 +16,10 @@ func _init(dir: Vector2, dmg, rcst, ptrt, spd, timeout):
 	add_to_group('bullet')
 	var col = CollisionShape2D.new()
 	col.disabled = true
-	col.shape = CapsuleShape2D.new()
+	var Shape = CapsuleShape2D.new()
+	Shape.height = 2
+	Shape.radius = 3
+	col.shape = Shape
 	spr.texture = load("res://assets/entity/weapon/bullet/images/patron-9x39-mm/9-39-BP.png")
 	
 	add_child(spr)
@@ -35,6 +38,5 @@ func _ready():
 
 	
 func _physics_process(delta):
-	
 	velocity = direction.normalized() * speed 
 	move_and_slide()

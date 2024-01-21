@@ -33,7 +33,7 @@ func _ready():
 	for arm in armament:
 		if (arm == 'first_weapon'):
 			weapon.init("res://assets/entity/weapon/vintorez.png", 20, 20)
-			weapon.position.y = global_position.y - 3
+#			weapon.position.y = global_position.y - 3
 			weapon.z_index = 4
 			self.weapon = weapon
 	inventory.create(item, armament)
@@ -50,12 +50,11 @@ func _unhandled_input(event):
 	if event.is_action_pressed("info"):
 		state = STATE.INFO
 	if event.is_action_pressed("inventory"):
-		inventory.show()
-	if event.is_action_released("inventory"):
-		inventory.hide()
-	if event.is_action_pressed("attack"):
-		if (weapon != null):
-			weapon._fire()
+		if inventory.is_visible_in_tree():
+			inventory.hide()
+		else:
+			inventory.show()
+
 	if event.is_action_pressed("list_up"):
 		if ($PickMenu.visible):
 			$PickMenu.set_prev_current_label()
@@ -106,11 +105,11 @@ func move_state ():
 		if velocity.x > 0:
 			
 			animation_sprite.play("move_right")
-			weapon.z_index = 6
+			weapon.z_index = 4
 			look_left = false
 		elif velocity.x < 0:
 			if (weapon != null):
-				weapon.z_index = 4
+				weapon.z_index = 6
 			animation_sprite.play("move_right")
 			look_left = true
 		elif velocity.y < 0:

@@ -1,6 +1,7 @@
-[gd_scene load_steps=30 format=3 uid="uid://qfn0yau7ue2o"]
+[gd_scene load_steps=31 format=3 uid="uid://qfn0yau7ue2o"]
 
 [ext_resource type="Script" path="res://Mobs/Player/Player.gd" id="1_1heul"]
+[ext_resource type="PackedScene" uid="uid://b3nsav782u7j7" path="res://primary/components/VisibleArea/VisibleArea.tscn" id="2_bcl7y"]
 [ext_resource type="PackedScene" uid="uid://drpft8xl6xsac" path="res://primary/weapon/Weapon.tscn" id="2_bqo3d"]
 [ext_resource type="Texture2D" uid="uid://bnyy7b7u6ydvn" path="res://assets/entity/player/stalker-sheet.png" id="2_u2t5t"]
 [ext_resource type="PackedScene" uid="uid://chmii5jckjwxk" path="res://primary/components/Inventory/UI.tscn" id="3_f5qua"]
@@ -184,16 +185,22 @@ collision_layer = 4
 collision_mask = 27
 slide_on_ceiling = false
 floor_stop_on_slope = false
+platform_floor_layers = 4294902015
 script = ExtResource("1_1heul")
 health = 100.0
 speed = 100.0
 
+[node name="VisibleArea" parent="." instance=ExtResource("2_bcl7y")]
+
 [node name="Weapon" parent="." instance=ExtResource("2_bqo3d")]
+z_index = 7
+position = Vector2(0, -5)
 
 [node name="UI" parent="." instance=ExtResource("3_f5qua")]
-offset_left = -560.0
+visible = false
+offset_left = -561.0
 offset_top = -311.0
-offset_right = -503.0
+offset_right = -504.0
 offset_bottom = -309.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -204,10 +211,11 @@ z_index = 5
 sprite_frames = SubResource("SpriteFrames_aodl6")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.241714
+frame = 2
+frame_progress = 0.0409875
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(1.42, 1.42)
+zoom = Vector2(1.625, 1.625)
 
 [node name="ItemPick" type="Area2D" parent="."]
 collision_mask = 32769
