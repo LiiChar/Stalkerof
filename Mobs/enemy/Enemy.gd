@@ -85,3 +85,12 @@ func _on_body_entered(body: Node2D):
 	
 func _on_body_exited(body: Node2D):
 	pass
+
+func getRandomPointInRadius(center: Vector2, radius: float) -> Vector2:
+	var angle: float = randi_range(0, 2 * PI)  # Random angle in radians
+	var distance: float = randi_range(0, radius)  # Random distance within the radius
+
+	var x: float = center.x + distance * cos(angle)
+	var y: float = center.y + distance * sin(angle)
+
+	return Vector2(x, y)

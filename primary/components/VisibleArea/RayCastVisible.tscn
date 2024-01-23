@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://qqedq2al4ovt"]
-
-[ext_resource type="Script" path="res://primary/components/VisibleArea/RayCastVisible.gd" id="1_hnsn0"]
-
-[node name="RayCastVisible" type="RayCast2D"]
-target_position = Vector2(0, 0)
-collision_mask = 16393
-hit_from_inside = true
-script = ExtResource("1_hnsn0")

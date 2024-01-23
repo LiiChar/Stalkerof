@@ -7,13 +7,11 @@ radius = 255.031
 
 [node name="VisibleArea" type="Area2D"]
 collision_layer = 16384
-collision_mask = 16397
+collision_mask = 16399
 script = ExtResource("1_x8x07")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_44j0k")
-
-[node name="Rays" type="Node2D" parent="."]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

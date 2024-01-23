@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://iyq5u0d7pe3l"]
+[gd_scene load_steps=8 format=3 uid="uid://iyq5u0d7pe3l"]
 
 [ext_resource type="Texture2D" uid="uid://db6cjyiry6xn3" path="res://assets/tilemap/world_autum/autumn tilemap.png" id="1_bxckn"]
 
@@ -7,10 +7,16 @@ vertices = PackedVector2Array(8, -8, 8, 8, -2.65165, 8, -3.18198, -8)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-3.18198, -8, -2.65165, 8, 8, 8, 8, -8)])
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_j1he5"]
+polygon = PackedVector2Array(-3.53553, -8, -1.76777, 5.74524, 8, 6.45235, 8, -8)
+
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_qaiy8"]
 vertices = PackedVector2Array(-8, -8, 4.41942, -8, 1.76777, 8, -8, 8)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-8, 8, 1.76777, 8, 4.41942, -8, -8, -8)])
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_kqo46"]
+polygon = PackedVector2Array(-8, 6.0988, 2.12132, 5.21491, 3.35876, -8, -8, -8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pcsfq"]
 texture = ExtResource("1_bxckn")
@@ -202,11 +208,13 @@ texture = ExtResource("1_bxckn")
 7:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 7:5/0/physics_layer_0/angular_velocity = 0.0
 0:6/0 = 0
+0:6/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_j1he5")
 0:6/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:6/0/physics_layer_0/angular_velocity = 0.0
 0:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3.0052, -8, -2.47487, 8, 8, 8, 8, -8)
 0:6/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_ss8qs")
 1:6/0 = 0
+1:6/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_kqo46")
 1:6/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:6/0/physics_layer_0/angular_velocity = 0.0
 1:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, 8, 2.2981, 8, 3.88909, -8)
@@ -429,6 +437,7 @@ texture = ExtResource("1_bxckn")
 8:14/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSet" id="TileSet_a6p8e"]
+occlusion_layer_0/light_mask = 1
 physics_layer_0/collision_layer = 3
 physics_layer_0/collision_mask = 0
 terrain_set_0/mode = 0

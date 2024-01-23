@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://ttvtofq5c1fc"]
+[gd_scene load_steps=19 format=3 uid="uid://ttvtofq5c1fc"]
 
 [ext_resource type="Script" path="res://Mobs/enemy/people/Stalker/Stalker.gd" id="1_8so5h"]
 [ext_resource type="Texture2D" uid="uid://bnyy7b7u6ydvn" path="res://assets/entity/player/stalker-sheet.png" id="2_byxpq"]
@@ -114,14 +114,7 @@ height = 32.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_weadb"]
 radius = 185.003
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_to6e4"]
-blend_mode = 2
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_h67wv"]
-polygon = PackedVector2Array(-0.5, -15, 3.5, -15, 3.5, -14, 4.5, -14, 4.5, -13, 5.5, -13, 5.5, -11, 4.5, -11, 4.5, -7, 5.5, -7, 5.5, -3, 4.5, -3, 4.5, 14, 5.5, 14, 5.5, 16, 2.5, 16, 2.5, 12, 1.5, 12, 1.5, 9, 0.5, 9, 0.5, 8, -0.5, 8, -0.5, 11, -1.5, 11, -1.5, 12, -2.5, 12, -2.5, 14, -1.5, 14, -1.5, 16, -4.5, 16, -4.5, 0, -3.5, 0, -3.5, -2, -4.5, -2, -4.5, -7, -3.5, -7, -3.5, -9, -2.5, -9, -2.5, -12, -1.5, -12, -1.5, -14, -0.5, -14)
-
 [node name="Stalker" type="CharacterBody2D" node_paths=PackedStringArray("_navigation", "_vision")]
-position = Vector2(0.5, 0)
 script = ExtResource("1_8so5h")
 rank = 100
 _navigation = NodePath("NavigationAgent2D")
@@ -143,7 +136,3 @@ shape = SubResource("CapsuleShape2D_bgfib")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_weadb")
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="." groups=["entity"]]
-material = SubResource("CanvasItemMaterial_to6e4")
-occluder = SubResource("OccluderPolygon2D_h67wv")

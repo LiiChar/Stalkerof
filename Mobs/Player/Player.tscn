@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://qfn0yau7ue2o"]
+[gd_scene load_steps=32 format=3 uid="uid://qfn0yau7ue2o"]
 
 [ext_resource type="Script" path="res://Mobs/Player/Player.gd" id="1_1heul"]
 [ext_resource type="PackedScene" uid="uid://b3nsav782u7j7" path="res://primary/components/VisibleArea/VisibleArea.tscn" id="2_bcl7y"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bnyy7b7u6ydvn" path="res://assets/entity/player/stalker-sheet.png" id="2_u2t5t"]
 [ext_resource type="PackedScene" uid="uid://chmii5jckjwxk" path="res://primary/components/Inventory/UI.tscn" id="3_f5qua"]
 [ext_resource type="PackedScene" uid="uid://gmrseoj7bv8a" path="res://Mobs/Player/PickMenu/PickMenu.tscn" id="4_hy20w"]
+[ext_resource type="Texture2D" uid="uid://dh7yjq1smgsut" path="res://assets/entity/common/circle.png" id="7_h0744"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p6e86"]
 radius = 6.0
@@ -225,6 +226,13 @@ collision_mask = 32768
 shape = SubResource("CapsuleShape2D_quqjc")
 
 [node name="PickMenu" parent="." instance=ExtResource("4_hy20w")]
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.2
+shadow_enabled = true
+shadow_filter = 1
+texture = ExtResource("7_h0744")
+texture_scale = 10.0
 
 [connection signal="body_entered" from="ItemPick" to="." method="_on_item_pick_body_entered"]
 [connection signal="body_exited" from="ItemPick" to="." method="_on_item_pick_body_exited"]
