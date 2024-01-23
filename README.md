@@ -1,2 +1,2 @@
-Game like ZERO zivert make by godot.
+STALKER-style game similar to ZERO Zievert.
 
