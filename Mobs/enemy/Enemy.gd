@@ -1,6 +1,7 @@
-extends CharacterBody2D
+extends Entity
+class_name Enemy
 
-@export_category("Entity")
+@export_category("Enemy")
 @export var _sprite: AnimatedSprite2D
 @export var _collision: CollisionShape2D
 @export var _navigation: NavigationAgent2D
@@ -11,7 +12,6 @@ enum STATE {MOVE, CHASE, DEATH, PATROL, EVADE, ATTACK}
 @export var group: Global.GROUPS
 
 var target: Node2D = null
-var speed: float
 var attack_range: float
 var detection_radius: float
 var evade_distance: float
@@ -80,8 +80,8 @@ func set_meta_info():
 	_vision.connect("body_entered", _on_body_entered)
 	_vision.connect("body_exited", _on_body_exited)
 
-func _on_body_entered(body: PhysicsBody2D):
+func _on_body_entered(body: Node2D):
 	pass
 	
-func _on_body_exited(body: PhysicsBody2D):
+func _on_body_exited(body: Node2D):
 	pass

@@ -17,4 +17,4 @@ layer_1/tile_data = PackedInt32Array(-131069, 196609, 1, -65533, 196609, 1, -131
 layer_2/tile_data = PackedInt32Array(196613, 1, 5, 196614, 65537, 5)
 
 [node name="Stalker" parent="." instance=ExtResource("5_gqcbd")]
-position = Vector2(132, 70)
+position = Vector2(300, 55)
