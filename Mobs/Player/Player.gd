@@ -13,11 +13,11 @@ var max_health: float = 0
 var dir = 1
 var look_left = false
 var item = [
-	Item_factory.create(Global.bullet[0].image, 1, [0, 0], Info.new('bullet', Global.bullet[0].caliber, 'ds', {}, 100)),
-	Item_factory.create(Global.bullet[0].image, 1, [0, 0], Info.new('bullet', Global.bullet[0].caliber, 'ds', {}, 100))
+	Item_factory.create(Global.bullet[0].image, 1, [0, 0], Info.new(Info.TYPE.BULLET, Global.bullet[0].caliber, 'ds', {}, 100)),
+	Item_factory.create(Global.bullet[0].image, 1, [0, 0], Info.new(Info.TYPE.BULLET, Global.bullet[0].caliber, 'ds', {}, 100))
 ]
 var armament = {
-	"first_weapon": Item_factory.create("res://assets/entity/weapon/vintorez.png", 1,  [1, 0], Info.new("weapon", "Vintorez", "My favorite gun", {}, 1000)),
+	"first_weapon": Item_factory.create("res://assets/entity/weapon/vintorez.png", 1,  [1, 0], Info.new(Info.TYPE.WEAPON, "Vintorez", "My favorite gun", {}, 1000)),
 }
 var prev_state = STATE.MOVE
 @onready var weapon: Weapon = $Weapon
@@ -33,16 +33,15 @@ func _ready():
 	for arm in armament:
 		if (arm == 'first_weapon'):
 			weapon.init("res://assets/entity/weapon/vintorez.png", 20, 20)
-#			weapon.position.y = global_position.y - 3
 			weapon.z_index = 4
 			self.weapon = weapon
 	inventory.create(item, armament)
 	inventory.connect("inventory_trade", _on_inventory_trader)
 	health = max_health
+	group = Global.GROUPS.STALKER
+	$VisibleArea.collision.shape.radius = 300
 		
 func _unhandled_input(event):
-	if event.is_action_pressed("attack"):
-		state = STATE.ATTACK
 	if event.is_action_pressed("move_down") or event.is_action_pressed("move_left") or event.is_action_pressed("move_rigth") or event.is_action_pressed("move_up"):
 		state = STATE.MOVE
 	if event.is_action_pressed("aim"):
@@ -51,8 +50,10 @@ func _unhandled_input(event):
 		state = STATE.INFO
 	if event.is_action_pressed("inventory"):
 		if inventory.is_visible_in_tree():
+			weapon.can_shoot = true
 			inventory.hide()
 		else:
+			weapon.can_shoot = false
 			inventory.show()
 
 	if event.is_action_pressed("list_up"):
@@ -63,6 +64,7 @@ func _unhandled_input(event):
 			$PickMenu.set_next_current_label()
 	if event.is_action_pressed("use"):
 		if ($PickMenu.visible and len($PickMenu.pickable_package)):
+			weapon.can_shoot = false
 			var items = $PickMenu.get_items_by_title($PickMenu.current_label.text)
 			if (items != null):
 				inventory.add_out_inventory(items, 50)
@@ -165,6 +167,7 @@ func _on_item_pick_body_entered(body):
 func _on_item_pick_body_exited(body):
 	if body.get_groups()[0] == 'package':
 		if (body.title == $PickMenu.current_label.text):
+			weapon.can_shoot = true
 			inventory.hide()
 		$PickMenu.remove_package(body)
 		
@@ -173,3 +176,13 @@ func _on_inventory_trader(itm: Item,  append: bool):
 		item.append(itm)
 	else:
 		item.erase(itm)
+
+
+func _on_visible_area_body_visibled(body, vision):
+	if body == self:
+		return
+	if (vision):
+		body.show()
+	else:
+		body.hide()
+		

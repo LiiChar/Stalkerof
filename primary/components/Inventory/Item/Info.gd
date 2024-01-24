@@ -1,8 +1,9 @@
 extends Node
 class_name Info
 
+enum TYPE {BULLET, ARMOR, WEAPON, FOOD, MEDKIT}
 
-var type: String
+var type: TYPE
 var title: String
 var description: String
 var specifications = {
@@ -11,7 +12,7 @@ var specifications = {
 }
 var cost: float
 
-func _init(type: String,title: String,description: String, specifications: Dictionary, cost: float):
+func _init(type: TYPE,title: String,description: String, specifications: Dictionary, cost: float):
 	self.type = type
 	self.title = title
 	self.description = description

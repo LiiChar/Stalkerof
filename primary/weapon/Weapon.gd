@@ -8,6 +8,7 @@ class_name Weapon
 var fireRate : float = 0.5
 var nextFireTime : float = 0
 var spread_angel = 0.05
+var radius_defeat := 100
 # Переменные отдачи54.565
 var recoil : bool = false
 var recoilDuration : float = 0.1

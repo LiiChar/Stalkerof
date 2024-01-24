@@ -9,16 +9,23 @@ class_name Enemy
 
 enum STATE {MOVE, CHASE, DEATH, PATROL, EVADE, ATTACK} 
 @export var state: STATE = STATE.MOVE
-@export var group: Global.GROUPS
 
-var target: Node2D = null
-var attack_range: float
-var detection_radius: float
-var evade_distance: float
+var target: Node2D = null:
+	set(trg):
+		if _navigation and trg:
+			_navigation.target_position = trg.global_position
+		if _navigation and _navigation.target_position and trg == null:
+			_navigation.target_position = Vector2.ZERO
+		target = trg
+	
+var attack_range: float = 10
+var detection_radius: float = 400
+var evade_distance: float = 300
 
 var inventory = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	_vision.collision.shape.radius = 300
 	set_meta_info()
 	
 func _process(delta):
@@ -46,9 +53,7 @@ func attack_state():
 	pass
 
 func chase_state():
-	if target and global_position.distance_to(target.global_position) > detection_radius:
-		state = STATE.MOVE
-	elif global_position.distance_to(target.global_position) > attack_range:
+	if global_position.distance_to(target.global_position) > attack_range:
 		chase()
 	else:
 		state = STATE.ATTACK
@@ -63,11 +68,10 @@ func death_state():
 	pass	
 	
 func chase():
-	if not _navigation.is_navigation_finished():
-		var movement_delta = speed 
-		var current_agent_position = global_position
-		var next_path_position = _navigation.get_next_path_position()
-		velocity = (next_path_position - current_agent_position).normalized() * movement_delta
+#	if not _navigation.is_navigation_finished():
+	_navigation.target_position = target.global_position
+	var next_path_position = _navigation.get_next_path_position()
+	velocity = (next_path_position - global_position).normalized() * speed
 	
 func set_meta_info():
 	add_to_group("entity", true)
@@ -77,13 +81,9 @@ func set_meta_info():
 	set_collision_mask_value(4, true)
 	set_collision_mask_value(2, true)
 	set_collision_mask_value(5, true)
-	_vision.connect("body_entered", _on_body_entered)
-	_vision.connect("body_exited", _on_body_exited)
+	_vision.connect("body_visibled", _on_visible_area_body_visibled)
 
-func _on_body_entered(body: Node2D):
-	pass
-	
-func _on_body_exited(body: Node2D):
+func _on_visible_area_body_visibled(body: Entity, vision: bool):
 	pass
 
 func getRandomPointInRadius(center: Vector2, radius: float) -> Vector2:

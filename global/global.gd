@@ -15,6 +15,27 @@ func _on_timer_timeout():
 	time += 1
 	
 enum GROUPS {STALKER, MONSTER, BANDIT, SCIENTIST}
+enum RELATION {ENEMIES,
+	CONFLICTS,
+	DISLIKE,
+	CALMNESS,
+	INDIFFERENCE,
+	UNACQUAINTED,
+	UNFAMILIARITY,
+	COMPANIONSHIP,
+	BROTHERHOOD,
+}	
+
+var relation = {
+	RELATION.ENEMIES: 0,
+	RELATION.CONFLICTS: 10,
+	RELATION.DISLIKE: 20,
+	RELATION.CALMNESS: 40,
+	RELATION.UNACQUAINTED: 50,
+	RELATION.UNFAMILIARITY: 60,
+	RELATION.COMPANIONSHIP: 80,
+	RELATION.BROTHERHOOD: 100,
+}
 	
 var groups_relation = {
 	GROUPS.STALKER: {
@@ -38,6 +59,24 @@ var groups_relation = {
 		GROUPS.SCIENTIST: 0,
 	},
 }
+
+func get_relation(your_group: GROUPS, entity_group: GROUPS) -> int:
+	if your_group == entity_group:
+		return 100
+	var relation_group = groups_relation[your_group][entity_group]
+	var prev_rel = null
+	var relationship: RELATION
+	for rel in relation:
+		
+		if relation_group <= relation[rel]:
+			if prev_rel == null:
+				relationship = rel
+				break
+			else:
+				relationship = prev_rel
+				break
+		prev_rel = rel
+	return relation[relationship]
 
 var bullet = [
   {

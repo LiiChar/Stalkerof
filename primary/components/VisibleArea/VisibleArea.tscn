@@ -3,11 +3,11 @@
 [ext_resource type="Script" path="res://primary/components/VisibleArea/VisibleArea.gd" id="1_x8x07"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_44j0k"]
-radius = 255.031
+radius = 144.531
 
 [node name="VisibleArea" type="Area2D"]
 collision_layer = 16384
-collision_mask = 16399
+collision_mask = 16415
 script = ExtResource("1_x8x07")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

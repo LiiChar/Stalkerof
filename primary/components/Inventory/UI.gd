@@ -60,7 +60,7 @@ func create_slot():
 	inventory.add_child(new_slot)
 	items.push_back(new_slot)
 	new_slot.slot_entered.connect(_on_slot_mouse_entered)
-	new_slot.slot_exited.connect(_on_slot_mouse_exited)
+#	new_slot.slot_exited.connect(_on_slot_mouse_exited)
 	
 func create_out_slot():
 	var new_slot = slote_scene.instantiate()
@@ -69,7 +69,7 @@ func create_out_slot():
 	OuterInventory.add_child(new_slot)
 	out_item.push_back(new_slot)
 	new_slot.slot_entered.connect(_on_slot_mouse_entered)
-	new_slot.slot_exited.connect(_on_slot_mouse_exited)
+#	new_slot.slot_exited.connect(_on_slot_mouse_exited)
 	
 func _on_slot_mouse_entered(a_slot):
 	current_slot = a_slot
@@ -80,8 +80,8 @@ func _on_slot_mouse_entered(a_slot):
 #		else:
 #			a_slot.state = a_slot.State.TAKEN
 	
-func _on_slot_mouse_exited(a_slot):
-	clear_grid()
+#func _on_slot_mouse_exited(a_slot):
+#	clear_grid()
 	
 func add_out_inventory(items: Array, size):
 #	for n in OuterInventory.get_children():
@@ -118,19 +118,22 @@ func create(items, armament):
 	if (armament != null):
 		self.armament = armament
 
-func clear_grid():
-	for item in items:
-		item.set_color()
-	if len(out_item) > 0:
-		for item in out_item:
-			item.set_color()	
+#func clear_grid():
+#	pass
 
 func place_item():
 	if can_place == false:
 		return
 	if current_slot.state == current_slot.State.TAKEN:
-		return 
-	
+		# Если мы ложим на предмет одной котегории они стакаются	
+		if current_slot.item_stored.info.type == Info.TYPE.WEAPON or current_slot.item_stored.info.type == Info.TYPE.ARMOR:
+			return
+		if  (current_slot.item_stored.info.type == holding_item.info.type 
+			and current_slot.item_stored.info.title == holding_item.info.title):
+				remove_child(holding_item)
+				holding_item = null
+				current_slot.item_stored.count += 1
+		return
 	if is_out_holding_item:
 		if current_slot.is_out_slot == false:
 			emit_signal("inventory_trade", holding_item, true)
@@ -143,7 +146,7 @@ func place_item():
 	current_slot.item_stored.global_position = get_global_mouse_position()
 	holding_item._snap_to(current_slot.global_position)
 	holding_item = null
-	clear_grid()
+#	clear_grid()
 	
 func pick_item():
 	if not current_slot or not current_slot.item_stored:
